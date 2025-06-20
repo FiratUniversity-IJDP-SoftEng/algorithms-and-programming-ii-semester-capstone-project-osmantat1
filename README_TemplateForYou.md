@@ -1,74 +1,77 @@
-# [Your Algorithm Name] - Interactive Visualization
+# Binary Search Tree (BST) - Interactive Visualization
 
 ## Project Overview
 
-This project is an interactive web application that implements and visualizes [Algorithm Name], developed as part of the Algorithms and Programming II course at Fırat University, Software Engineering Department.
+This project is an interactive command-line application that implements and visualizes the Binary Search Tree (BST) operations. It was developed as part of the Algorithms and Programming II course at Fırat University, Software Engineering Department.
 
 ## Algorithm Description
 
-[Provide a comprehensive explanation of your algorithm here. Include the following elements:]
-
 ### Problem Definition
 
-[Clearly define the problem that the algorithm solves]
+The Binary Search Tree (BST) is a data structure used to store ordered data that allows fast lookup, addition, and removal of items. This project aims to simulate and visualize these BST operations interactively.
 
 ### Mathematical Background
 
-[Explain any mathematical concepts, formulas, or notation relevant to understanding the algorithm]
+- A Binary Search Tree is a binary tree where each node follows this property:  
+  Left subtree keys < Node key < Right subtree keys
 
 ### Algorithm Steps
 
-1. [Step 1 with explanation]
-2. [Step 2 with explanation]
-3. [Step 3 with explanation]
-...
+1. Insertion – Place a node in the correct position based on value.
+2. Search – Traverse left or right recursively to find a node.
+3. Deletion – Remove a node and restructure the tree accordingly:
+   - No child → remove node.
+   - One child → replace node with child.
+   - Two children → replace with inorder successor.
+4. Traversal – Visit nodes in inorder, preorder, or postorder order.
 
 ### Pseudocode
 
 ```
-[Include pseudocode representation of your algorithm]
+function insert(node, key):
+    if node is null:
+        return new Node(key)
+    if key < node.key:
+        node.left = insert(node.left, key)
+    else:
+        node.right = insert(node.right, key)
+    return node
 ```
 
 ## Complexity Analysis
 
 ### Time Complexity
 
-- **Best Case:** O(...) - [Explanation]
-- **Average Case:** O(...) - [Explanation]
-- **Worst Case:** O(...) - [Explanation]
+- Best Case: O(log n) – when the tree is balanced  
+- Average Case: O(log n)  
+- Worst Case: O(n) – when the tree becomes a linked list
 
 ### Space Complexity
 
-- O(...) - [Explanation]
+- O(n) – for storing n nodes and recursion stack
 
 ## Features
 
-- [Feature 1]
-- [Feature 2]
-- [Feature 3]
-...
-
-## Screenshots
-
-![Main Interface](docs/screenshots/main_interface.png)
-*Caption describing the main interface*
-
-![Algorithm in Action](docs/screenshots/algorithm_demo.png)
-*Caption describing the algorithm in action*
+- Insert, delete, and search operations  
+- Inorder, preorder, and postorder traversals  
+- Random input generation  
+- Unit test support  
+- Modular code structure  
+- Clear CLI-based menu system
 
 ## Installation
 
 ### Prerequisites
 
-- Python 3.8 or higher
+- Python 3.8 or higher  
 - Git
 
 ### Setup Instructions
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/your-repository.git
-   cd your-repository
+   git clone https://github.com/osmantat/bst-visualizer.git
+   cd bst-visualizer
    ```
 
 2. Create a virtual environment:
@@ -94,37 +97,51 @@ This project is an interactive web application that implements and visualizes [A
 
 ## Usage Guide
 
-1. [Step 1 of using the application]
-2. [Step 2 of using the application]
-3. [Step 3 of using the application]
-...
+1. Launch the application with `streamlit run app.py`.  
+2. Use the sidebar or CLI options to:  
+   - Insert new elements into the BST  
+   - Delete nodes from the BST  
+   - Search for elements  
+   - Visualize tree traversals (inorder, preorder, postorder)  
+3. (Optional) Generate random numbers for automated testing and tree creation.
 
 ### Example Inputs
 
-- [Example 1 with expected output]
-- [Example 2 with expected output]
-- [Example 3 with expected output]
+- Insert: `30`, `15`, `50`, `40`, `70`  
+  - Expected Inorder Output: `15 30 40 50 70`
+- Delete: `40`  
+  - Inorder after deletion: `15 30 50 70`
+- Search: `70` → Output: `"Found"`
+- Traversal types:
+  - Preorder: `30 15 50 70`
+  - Postorder: `15 70 50 30`
 
 ## Implementation Details
 
 ### Key Components
 
-- `algorithm.py`: Contains the core algorithm implementation
-- `app.py`: Main Streamlit application
-- `utils.py`: Helper functions for data processing
-- `visualizer.py`: Functions for visualization
+- `algorithm.py`: Contains the core Binary Search Tree logic (insert, delete, search, traversals)  
+- `app.py`: Main application entry point (Streamlit or CLI-based)  
+- `utils.py`: Utility functions for timing, random input generation, etc.  
+- `test-algorithm.py`: Unit tests for validating algorithm correctness  
+- *(optional)* `visualizer.py`: Visual representation logic (future improvement)
 
 ### Code Highlights
 
 ```python
-# Include a few key code snippets that demonstrate the most important parts of your implementation
-def key_function(parameter):
+def insert(self, key):
     """
-    Docstring explaining what this function does
+    Inserts a key into the BST.
     """
-    # Implementation with comments explaining the logic
-    result = process(parameter)
-    return result
+    def _insert(node, key):
+        if not node:
+            return Node(key)
+        if key < node.key:
+            node.left = _insert(node.left, key)
+        else:
+            node.right = _insert(node.right, key)
+        return node
+    self.root = _insert(self.root, key)
 ```
 
 ## Testing
@@ -132,56 +149,59 @@ def key_function(parameter):
 This project includes a test suite to verify the correctness of the algorithm implementation:
 
 ```bash
-python -m unittest test_algorithm.py
+python -m unittest test-algorithm.py
 ```
 
 ### Test Cases
 
-- [Test case 1 description]
-- [Test case 2 description]
-- [Test case 3 description]
+- Insertion: Validate BST structure and inorder traversal  
+- Deletion: Handle leaf, one-child, and two-child deletion cases  
+- Search: Verify existing and non-existing key search  
+- Traversals: Ensure outputs match expected sequences
 
 ## Live Demo
 
-A live demo of this application is available at: [Insert Streamlit Cloud URL here]
+A live demo of this application is available at:  
+**(Optional)** https://bst-osmantat.streamlit.app  
+*(This can be deployed later using Streamlit Cloud)*
 
 ## Limitations and Future Improvements
 
 ### Current Limitations
 
-- [Limitation 1]
-- [Limitation 2]
-- [Limitation 3]
+- No graphical tree visualization (just text-based traversals)  
+- Tree is not auto-balanced (no AVL or Red-Black balancing)  
+- CLI/Streamlit interface only; no persistent storage
 
 ### Planned Improvements
 
-- [Improvement 1]
-- [Improvement 2]
-- [Improvement 3]
+- Integrate AVL Tree support for balanced tree comparison  
+- Add `graphviz` or `networkx` for graphical visualization  
+- Deploy a full web version using Streamlit Cloud
 
 ## References and Resources
 
 ### Academic References
 
-1. [Reference 1]
-2. [Reference 2]
-3. [Reference 3]
+1. Data Structures and Algorithms, Cormen et al.  
+2. Binary Search Tree Lecture Notes - Fırat University  
+3. AVL Trees - CLRS (Introduction to Algorithms)
 
 ### Online Resources
 
-- [Resource 1]
-- [Resource 2]
-- [Resource 3]
+- https://www.geeksforgeeks.org/binary-search-tree-data-structure/  
+- https://en.wikipedia.org/wiki/Binary_search_tree  
+- https://docs.python.org/3/
 
 ## Author
 
-- **Name:** [Your Name]
-- **Student ID:** [Your Student ID]
-- **GitHub:** [Your GitHub Username]
+- **Name:** Osman Tat  
+- **Student ID:** 230543002  
+- **GitHub:** https://github.com/osmantat1
 
 ## Acknowledgements
 
-I would like to thank Assoc. Prof. Ferhat UÇAR for guidance throughout this project, and [any other acknowledgements].
+I would like to thank **Assoc. Prof. Ferhat UÇAR** for guidance throughout this project and my classmates for their feedback and support.
 
 ---
 
